@@ -7,9 +7,13 @@ int main() {
     // Parodo du skaicius po kablelio
     cout << fixed << setprecision(2);
 
-    int pasirinkimas;
-    string valiuta;
-    double kiekis;
+    char testi = 't';   // ar kartoti programą
+
+    while (testi == 't') {
+
+        int pasirinkimas;
+        string valiuta;
+        double kiekis;
 
     // Visu valiutu kursai
     double GBP_Bendras   = 0.8729;
@@ -24,7 +28,7 @@ int main() {
     double INR_Pirkti    = 101.3862;
     double INR_Parduoti  = 107.8546;
 
-    // ---------------- MENIU ----------------
+    // Pagrindinis meniu
     cout << "1 - Palyginti valiutos kursa\n";
     cout << "2 - Pirkti valiuta (EUR -> kita valiuta)\n";
     cout << "3 - Parduoti valiuta (kita valiuta -> EUR)\n";
@@ -105,7 +109,11 @@ int main() {
         else {
             cout << "Nezinoma valiuta.\n";
         }
+        // Ar kartoti
+        cout << "\n Ar norite skaiciuoti dar karta? (t/n): ";
+        cin >> testi;
     }
-
+        cout << "\nSkaiciavimas atliktas\n";
+    }
     return 0;
 }
