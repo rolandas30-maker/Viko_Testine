@@ -23,79 +23,135 @@ int main() {
         cout << "0 - Baigti programa\n";
         cout << "Pasirinkite: ";
         cin >> pasirinkimas;
-//Ivesti mokini
+
+        //1.Ivesti mokini
         if (pasirinkimas == 1) {
+            if (mokiniuSkaicius >= MAX_MOKINIU) {
+                cout << "Pasiektas maksimalus mokiniu skaicius.\n";
+                continue;
+            }
+
             cout << "Iveskite mokinio varda: ";
             cin >> vardai[mokiniuSkaicius];
 
-            cout << "Kiek pazymiu: ";
+            cout << "Kiek pazymiu (max 10): ";
             cin >> pazymiuKiekis[mokiniuSkaicius];
 
+            if (pazymiuKiekis[mokiniuSkaicius] > MAX_PAZYMIU) {
+                pazymiuKiekis[mokiniuSkaicius] = MAX_PAZYMIU;
+            }
+
             for (int j = 0; j < pazymiuKiekis[mokiniuSkaicius]; j++) {
-                cout << "Iveskite pazymi: ";
+                cout << "Iveskite " << j + 1 << "-aji pazymi: ";
                 cin >> pazymiai[mokiniuSkaicius][j];
             }
+
             mokiniuSkaicius++;
+            cout << "Mokinys sekmingai pridetas.\n";
         }
-//Rodyti visus mokinius
+
+        //2.Rodyti visus mokinius
         else if (pasirinkimas == 2) {
+            if (mokiniuSkaicius == 0) {
+                cout << "Mokiniu nera.\n";
+                continue;
+            }
+
             for (int i = 0; i < mokiniuSkaicius; i++) {
                 cout << vardai[i] << ": ";
-                for (int j = 0; j < pazymiuKiekis[i]; j++)
+                for (int j = 0; j < pazymiuKiekis[i]; j++) {
                     cout << pazymiai[i][j] << " ";
+                }
                 cout << endl;
             }
         }
-//Rodyti vieno mokinio pazymius
+
+        //3.Rodyti vieno mokinio pazymius
         else if (pasirinkimas == 3) {
-            string vardas;
+            string ieskomas;
             cout << "Iveskite mokinio varda: ";
-            cin >> vardas;
+            cin >> ieskomas;
+
+            bool rastas = false;
 
             for (int i = 0; i < mokiniuSkaicius; i++) {
-                if (vardai[i] == vardas) {
-                    for (int j = 0; j < pazymiuKiekis[i]; j++)
+                if (vardai[i] == ieskomas) {
+                    cout << vardai[i] << " pazymiai: ";
+                    for (int j = 0; j < pazymiuKiekis[i]; j++) {
                         cout << pazymiai[i][j] << " ";
+                    }
+                    cout << endl;
+                    rastas = true;
                 }
             }
-            cout << endl;
+
+            if (!rastas) {
+                cout << "Mokinys nerastas.\n";
+            }
         }
-//Keisti pazymi
+
+        //4. Keisti pazymi
         else if (pasirinkimas == 4) {
             string vardas;
             cout << "Iveskite mokinio varda: ";
             cin >> vardas;
 
+            bool rastas = false;
+
             for (int i = 0; i < mokiniuSkaicius; i++) {
                 if (vardai[i] == vardas) {
                     int nr;
-                    cout << "Kuri pazymi keisti: ";
+                    cout << "Kuri pazymi keisti (1-" << pazymiuKiekis[i] << "): ";
                     cin >> nr;
-                    cout << "Iveskite nauja pazymi: ";
-                    cin >> pazymiai[i][nr - 1];
+
+                    if (nr >= 1 && nr <= pazymiuKiekis[i]) {
+                        cout << "Iveskite nauja pazymi: ";
+                        cin >> pazymiai[i][nr - 1];
+                        cout << "Pazymys atnaujintas.\n";
+                    } else {
+                        cout << "Neteisingas pazymio numeris.\n";
+                    }
+
+                    rastas = true;
                 }
             }
+
+            if (!rastas) {
+                cout << "Mokinys nerastas.\n";
+            }
         }
-//Trinti mokini
+
+        //5. Istrinti mokini
         else if (pasirinkimas == 5) {
             string vardas;
-            cout << "Iveskite mokinio varda: ";
+            cout << "Iveskite mokinio varda pasalinimui: ";
             cin >> vardas;
+
+            bool rastas = false;
 
             for (int i = 0; i < mokiniuSkaicius; i++) {
                 if (vardai[i] == vardas) {
                     for (int j = i; j < mokiniuSkaicius - 1; j++) {
                         vardai[j] = vardai[j + 1];
                         pazymiuKiekis[j] = pazymiuKiekis[j + 1];
-                        for (int k = 0; k < pazymiuKiekis[j]; k++)
+                        for (int k = 0; k < pazymiuKiekis[j]; k++) {
                             pazymiai[j][k] = pazymiai[j + 1][k];
+                        }
                     }
                     mokiniuSkaicius--;
+                    rastas = true;
+                    cout << "Mokinys pasalintas.\n";
+                    break;
                 }
+            }
+
+            if (!rastas) {
+                cout << "Mokinys nerastas.\n";
             }
         }
 
     } while (pasirinkimas != 0);
 
+    cout << "Programa baigta.\n";
     return 0;
 }
