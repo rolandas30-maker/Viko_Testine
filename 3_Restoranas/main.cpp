@@ -80,7 +80,7 @@ void printCheck(menuItemType menuList[], int order[], int size) {
     double pvm = suma * 0.21;
     double galutine = suma + pvm;
 
-    cout << "\nMokesčiai (21%): " << pvm << " EUR\n";
+    cout << "\n Mokesčiai (21%): " << pvm << " EUR\n";
     cout << "Galutinė suma: " << galutine << " EUR\n";
 
     outFile << "\nMokesčiai (21%): " << pvm << " EUR\n";
