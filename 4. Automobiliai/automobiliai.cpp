@@ -234,7 +234,7 @@ void ieskotiPagalNumeri(const vector<Automobilis>& sarasas) {
 void redaguotiIrasa(vector<Automobilis>& sarasas) {
     rodytiVisus(sarasas);
     if (sarasas.empty()) return;
-    int nr = nuskaitytiInt("Áveskite Nr. automobilio, kurá paðalinti (0 - atðaukti): ", 0, (int)sarasas.size());
+    int nr = nuskaitytiInt("Áveskite Nr. automobilio, kurio duomenis redaguoti (0 - atðaukti): ", 0, (int)sarasas.size());
     if (nr == 0) { cout << "Ðalinimas atðauktas.\n"; return; }
     Automobilis& a = sarasas[nr - 1];
     cout << "\nRedaguojamas: " << a.marke << " " << a.modelis << " (" << a.numeris << ")\n";
@@ -291,7 +291,7 @@ void redaguotiIrasa(vector<Automobilis>& sarasas) {
 void trintiIrasa(vector<Automobilis>& sarasas) {
     rodytiVisus(sarasas);
     if (sarasas.empty()) return;
-    int nr = nuskaitytiInt("Áveskite Nr. automobilio, kurá redaguoti (0 - atðaukti): ", 0, (int)sarasas.size());
+    int nr = nuskaitytiInt("Áveskite Nr. automobilio, kurá paðalinti (0 - atðaukti): ", 0, (int)sarasas.size());
     if (nr == 0) { cout << "Redagavimas atðauktas.\n"; return; }
     const Automobilis& a = sarasas[nr - 1];
     cout << "Ar tikrai norite paðalinti " << a.marke << " " << a.modelis << " (" << a.numeris << ")? (y/n): ";
@@ -425,10 +425,15 @@ int main() {
             case 6: filtruotiPagalTA(baze);    break;
             case 7: rikiuoti(baze);            break;
             case 8: statistika(baze);          break;
-            case 0:
-                irasytiIFaila(baze, FAILAS);
-                cout << "Viso gero!\n";
-                break;
+         	case 0:
+    			cout << "Issaugoti duomenis pries isejima? (y/n): ";
+    			char ats; cin >> ats;
+    			if (ats == 'y' || ats == 'Y')
+        			irasytiIFaila(baze, FAILAS);
+    			else
+        			cout << "Pakeitimai neissaugoti.\n";
+    			cout << "Viso gero!\n";
+    			break;
             default:
                 cout << "Neteisingas pasirinkimas! Bandykite dar karta.\n";
         }
