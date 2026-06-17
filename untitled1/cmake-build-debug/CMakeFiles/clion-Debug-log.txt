@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\Users\User\Desktop\Viko_testine_repozitorija\untitled1 Select CMakeLists.txt
